@@ -4,6 +4,7 @@ import "./test.scss";
 import { useDispatch } from 'react-redux';
 // import { addTodo ,deleteTodo, removeTodo } from '../actions/index';
 import { addTodo  } from '../actions/index';
+import Component1 from './Component1';
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28"];
 const delay = 2500;
@@ -40,7 +41,7 @@ export const Todo = () => {
        <>
          <div className="main-wrapper App-header">
          <div className="input-container ">
-           <h1>Test Sass</h1>
+                   <Component1></Component1>
                  <figure>
                    <figcaption>Add Your List here !</figcaption>
                  </figure>

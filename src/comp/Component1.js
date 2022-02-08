@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, createContext, useContext } from "react";
 import Component2 from './Component2';
 
-const UserContext = createContext();
+export  const UserContext = createContext();
 
 export default function Component1() {
 
