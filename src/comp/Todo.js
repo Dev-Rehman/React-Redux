@@ -1,61 +1,67 @@
-import React, { useState }  from 'react';
+import React, { useState ,useRef }  from 'react';
 import "./todo.css";
+
 import "./test.scss";
-import { useDispatch } from 'react-redux';
+import {Provider, useDispatch} from 'react-redux';
+// import { useDispatch } from 'react-redux';
 // import { addTodo ,deleteTodo, removeTodo } from '../actions/index';
 import { addTodo  } from '../actions/index';
-import Component1 from './Component1';
+import store from '../store';
+// import Component1 from './Component1';
 
-const colors = ["#0088FE", "#00C49F", "#FFBB28"];
-const delay = 2500;
+
 export const Todo = () => {
   
   const [ inputData , setInputData ] = useState('');
+  const [ InputDataHandler , setInputDataHandler ] = useState('');
+    const inputRef = useRef(null);
+    const DataHandler = useRef(null);
 
-  const [index, setIndex] = React.useState(0);
-  const timeoutRef = React.useRef(null);
+    function handleInput() {
+      // inputRef.current.style.color="red";
+      inputRef.current.style.display= "none";
+  //  let  InputValue = inputRef.current.value;
 
-  function resetTimeout() {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+
     }
-  }
-
-  React.useEffect(() => {
-    resetTimeout();
-    timeoutRef.current = setTimeout(
-      () =>
-        setIndex((prevIndex) =>
-          prevIndex === colors.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
-
-    return () => {
-      resetTimeout();
-    };
-  }, [index]);
-//  const dispatch = useDispatch();
+ const dispatch = useDispatch();
      return (
   <>
-       <>
+
          <div className="main-wrapper App-header">
+ 
          <div className="input-container ">
-                   <Component1></Component1>
                  <figure>
                    <figcaption>Add Your List here !</figcaption>
                  </figure>
                  <div className="addItem">
-                    <input className="input-custom" value={inputData} 
-                    onChange={(event)=> setInputData(event.target.value) } placeholder="Add Items."  type="text" />
-                       {/* <i className='fa fa-plus add-btn'  onClick={()=>dispatch(addTodo) }/> */}
+                   <input type="type"  placeholder="Add Items.."
+                   value={inputData}
+                   onChange={(e)=> setInputData(e.target.value)}
+                   />
+                       <i className='fa fa-plus add-btn'  onClick={()=>{dispatch(addTodo(inputData)) 
+                      
+                        
+  console.log(store.getState().todoReducers.list)                        
+                      
+                      }}/>
                  </div>
 
          </div>
+         <div>
+           <input type="text"  ref={inputRef} />
+           <button onClick={handleInput} >Press</button>
+         </div>
+         <div>
+
+           <input type="text"  ref={DataHandler} />
+           <button> Click Me </button>
+         
          </div>
          
+         </div>
+    
  
-    </>
    </>
    )  
 };

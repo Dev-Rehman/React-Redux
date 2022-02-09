@@ -10,6 +10,7 @@ export default function Component1() {
 
 
     const [data, setData] = useState([]);
+    const [InputData, setInputData] = useState();
     const [user, setUser] = useState("Abdul Rehman");
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -21,10 +22,11 @@ export default function Component1() {
 
 
     return (
-        <UserContext.Provider value={data.title}>
+        <UserContext.Provider value={InputData}>
           <h1>{`Hello ${user}!`}</h1>
           <h1>{`Hello ${data.title}!`}</h1>
-
+          {/* <h1>{InputData}</h1> */}
+          <input placeholder='placeholder' value={InputData} onChange={(e)=> setInputData(e.target.value)} ></input>
           <Component2 user={user} />
         </UserContext.Provider>
       );
