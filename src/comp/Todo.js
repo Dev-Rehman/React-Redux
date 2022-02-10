@@ -1,4 +1,4 @@
-import React, { useState ,useRef }  from 'react';
+import React, { useState ,useRef, useEffect }  from 'react';
 import "./todo.css";
 
 import "./test.scss";
@@ -7,12 +7,13 @@ import {Provider, useDispatch} from 'react-redux';
 // import { addTodo ,deleteTodo, removeTodo } from '../actions/index';
 import { addTodo  } from '../actions/index';
 import store from '../store';
+import { useSelector } from "react-redux";
 // import Component1 from './Component1';
 
 
-export const Todo = () => {
-  
+ const Todo = () => {
   const [ inputData , setInputData ] = useState('');
+  const [ inputData1 , setInputData1 ] = useState('');
   const [ InputDataHandler , setInputDataHandler ] = useState('');
     const inputRef = useRef(null);
     const DataHandler = useRef(null);
@@ -24,6 +25,11 @@ export const Todo = () => {
 
 
     }
+
+
+    useEffect(() => {
+      
+    },[inputData1]);
  const dispatch = useDispatch();
      return (
   <>
@@ -39,16 +45,20 @@ export const Todo = () => {
                    value={inputData}
                    onChange={(e)=> setInputData(e.target.value)}
                    />
-                       <i className='fa fa-plus add-btn'  onClick={()=>{dispatch(addTodo(inputData)) 
-                      
-                        
-  console.log(store.getState().todoReducers.list)                        
-                      
+                    <i className='fa fa-plus add-btn'  onClick={()=>{dispatch(addTodo(inputData)) 
+                      setInputData1(store.getState().todoReducers.list.data)
                       }}/>
                  </div>
 
          </div>
          <div>
+           {inputData1 ? 
+            (
+              <p>adsds22</p>
+            ) : (<p>adsds11</p>)
+          }
+         </div>
+         {/* <div>
            <input type="text"  ref={inputRef} />
            <button onClick={handleInput} >Press</button>
          </div>
@@ -57,7 +67,7 @@ export const Todo = () => {
            <input type="text"  ref={DataHandler} />
            <button> Click Me </button>
          
-         </div>
+         </div> */}
          
          </div>
     
@@ -65,3 +75,4 @@ export const Todo = () => {
    </>
    )  
 };
+
