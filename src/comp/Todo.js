@@ -2,18 +2,19 @@ import React, { useState ,useRef, useEffect }  from 'react';
 import "./todo.css";
 
 import "./test.scss";
-import {Provider, useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 // import { useDispatch } from 'react-redux';
 // import { addTodo ,deleteTodo, removeTodo } from '../actions/index';
-import { addTodo  } from '../actions/index';
+import { addTodo,deleteTodo ,removeTodo } from '../actions/index';
 import store from '../store';
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 // import Component1 from './Component1';
 
 
- const Todo = () => {
+ export const Todo = () => {
   const [ inputData , setInputData ] = useState('');
-  const [ inputData1 , setInputData1 ] = useState('');
+  const list  = useSelector((state)=> state.todoReducers.list);
+  const [ reduxInputData , setreduxInputData ] = useState([]);
   const [ InputDataHandler , setInputDataHandler ] = useState('');
     const inputRef = useRef(null);
     const DataHandler = useRef(null);
@@ -21,15 +22,13 @@ import { useSelector } from "react-redux";
     function handleInput() {
       // inputRef.current.style.color="red";
       inputRef.current.style.display= "none";
-  //  let  InputValue = inputRef.current.value;
-
-
-    }
+      // let  InputValue = inputRef.current.value;
+     }
 
 
     useEffect(() => {
-      
-    },[inputData1]);
+     
+    },[reduxInputData]);
  const dispatch = useDispatch();
      return (
   <>
@@ -45,22 +44,37 @@ import { useSelector } from "react-redux";
                    value={inputData}
                    onChange={(e)=> setInputData(e.target.value)}
                    />
-                    <i className='fa fa-plus add-btn'  onClick={()=>{dispatch(addTodo(inputData)) 
-                      setInputData1(store.getState().todoReducers.list.data)
-                      }}/>
+                    <button className='fa fa-plus add-btn'  onClick={()=>{dispatch(addTodo(inputData)) 
+                      setreduxInputData(store.getState().todoReducers.list)
+                      setInputData('')
+                      }}>Test </button>
                  </div>
 
          </div>
          <div>
-           {inputData1 ? 
-            (
-              <p>adsds22</p>
-            ) : (<p>adsds11</p>)
+           {reduxInputData.map((d,i)=> {
+          return (
+            <h1 key={i}>{d.data} <button className='fa fa-trash-alt add-btn'  onClick={()=>{dispatch(deleteTodo(d.id))}}>test</button></h1> 
+            )
           }
+           )}
+           {/* <h1>
+             {
+               reduxInputData.map(Item => {
+                return <h1>{Item}</h1> 
+            })
+             }
+           </h1> */}
+           {/* {reduxInputData ? 
+            
+          } */}
+         </div>
+         <div>
+            <button  onClick={()=>{dispatch(removeTodo())}}> Remove All</button>
          </div>
          {/* <div>
            <input type="text"  ref={inputRef} />
-           <button onClick={handleInput} >Press</button>
+           <but onClick={handleInput} >Press</but  ton>
          </div>
          <div>
 

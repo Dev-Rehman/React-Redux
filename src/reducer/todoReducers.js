@@ -13,11 +13,21 @@ const todoReducers = (state=initialData, action) => {
         list: [
             ...state.list,
             {
-                id:id,
-               data:data
+                id,
+               data
         }
     ]
     }
+    case "DELETE_TODO": 
+     const  newList =  state.list.filter((elem) => elem.id !== action.id)
+    return {
+     ...state,
+           List : newList 
+    }
+    case "removeTodo": return {
+    ...state,
+          list : [] 
+   }
     default : return state;
    }
 
