@@ -22,9 +22,12 @@ const todoReducers = (state=initialData, action) => {
      const  newList =  state.list.filter((elem) => elem.id !== action.id)
     return {
      ...state,
-           List : newList 
+           list : newList 
     }
-    case "removeTodo": return {
+    case "REMOVE_TODO":
+        // debugger
+     console.log("REMOVE_TODO 1");    
+    return {
     ...state,
           list : [] 
    }

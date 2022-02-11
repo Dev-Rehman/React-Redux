@@ -47,7 +47,7 @@ import store from '../store';
                     <button className='fa fa-plus add-btn'  onClick={()=>{dispatch(addTodo(inputData)) 
                       setreduxInputData(store.getState().todoReducers.list)
                       setInputData('')
-                      }}>Test </button>
+                      }}> Test </button>
                  </div>
 
          </div>
@@ -77,10 +77,8 @@ import store from '../store';
            <but onClick={handleInput} >Press</but  ton>
          </div>
          <div>
-
            <input type="text"  ref={DataHandler} />
            <button> Click Me </button>
-         
          </div> */}
          
          </div>

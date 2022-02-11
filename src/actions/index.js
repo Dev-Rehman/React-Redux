@@ -20,7 +20,7 @@ export const addTodo = (data) => {
       }
 }
  export const removeTodo = () => {
-   console.log("ddd");
+  console.log("Test");
     return {
         type : "REMOVE_TODO"
       }
